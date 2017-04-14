@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnDestroy } from "@angular/core";
-import { Background } from "../../shared/models/Background";
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnDestroy, ViewEncapsulation } from "@angular/core";
 
 import { JSUIEngine } from "js-ui-engine-ngx-wrapper";
 
 const MathTAU = (Math.PI * 2);
 
 @Component({
-    moduleId: module.id,
     selector: 'hold-animation',
-    templateUrl: 'hold-animation.view.html',
-    styleUrls: ['hold-animation.component.css']
+    templateUrl: './hold-animation.view.html',
+    styleUrls: ['./hold-animation.style.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class HoldAnimationComponent implements OnInit, OnDestroy {

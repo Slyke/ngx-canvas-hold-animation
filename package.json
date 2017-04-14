@@ -2,7 +2,7 @@
   "name": "ngx-canvas-hold-animation",
   "version": "1.20170414.1",
   "description": "Hold Animation for point or touch devices",
-  "main": "bundles/ngx-hold-animation.umd.js",
+  "main": "bundles/ngx-canvas-hold-animation.umd.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "author": "Slyke",
@@ -15,7 +15,7 @@
     "url": "https://github.com/Slyke/Ngx-Hold-Animation.git"
   },
   "dependencies": {
-    "js-ui-engine-ngx-wrapper": "^1.20170406.1",
+    "js-ui-engine-ngx-wrapper": "^1.20170406.1"
   },
   "scripts": {
     "init": "npm install",
@@ -33,7 +33,9 @@
     "@angular/compiler-cli": "^4.0.1",
     "@angular/core": "^4.0.1",
     "@types/node": "^7.0.12",
+    "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.1.2",
+    "raw-loader": "^0.5.1",
     "rxjs": "^5.3.0",
     "string-replace-loader": "^1.2.0",
     "strip-sourcemap-loader": "0.0.1",
