@@ -1,4 +1,4 @@
 export {
-    HoldAnimationComponent
+    HoldAnimationComponent, HoldAnimationModule
 } from './lib/index';
 

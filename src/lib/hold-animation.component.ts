@@ -6,7 +6,7 @@ const MathTAU = (Math.PI * 2);
 
 @Component({
     selector: 'hold-animation',
-    templateUrl: './hold-animation.view.html',
+    template: require('./hold-animation.view.html'),
     styleUrls: ['./hold-animation.style.css'],
     encapsulation: ViewEncapsulation.None
 })

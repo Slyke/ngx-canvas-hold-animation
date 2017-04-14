@@ -19,6 +19,7 @@
   },
   "files": [
     "index.ts",
+    "lib/hold-animation.module.ts",
     "lib/hold-animation.component.ts"
   ],
   "angularCompilerOptions": {

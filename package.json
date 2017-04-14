@@ -1,6 +1,6 @@
 {
   "name": "ngx-canvas-hold-animation",
-  "version": "1.20170414.1",
+  "version": "1.20170415.1",
   "description": "Hold Animation for point or touch devices",
   "main": "bundles/ngx-canvas-hold-animation.umd.js",
   "module": "./dist/index.js",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Slyke/Ngx-Hold-Animation.git"
+    "url": "https://github.com/Slyke/ngx-canvas-hold-animation.git"
   },
   "dependencies": {
     "js-ui-engine-ngx-wrapper": "^1.20170406.1"
