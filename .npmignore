@@ -1,0 +1,10 @@
+.*
+*.tgz
+
+src/
+config/
+example/
+
+package/
+npm-debug.log
+node_modules/

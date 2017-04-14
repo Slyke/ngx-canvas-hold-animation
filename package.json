@@ -1,0 +1,44 @@
+{
+  "name": "ngx-canvas-hold-animation",
+  "version": "1.20170414.1",
+  "description": "Hold Animation for point or touch devices",
+  "main": "bundles/ngx-hold-animation.umd.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "author": "Slyke",
+  "contributors": [
+    "Steven Lawler (Slyke) <steven.lawler777@gmail.com>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Slyke/Ngx-Hold-Animation.git"
+  },
+  "dependencies": {
+    "js-ui-engine-ngx-wrapper": "^1.20170406.1",
+  },
+  "scripts": {
+    "init": "npm install",
+    "start": "npm run build",
+    "watch": "watch 'npm run build' src/",
+    "clean": "rm -rf dist bundles node_modules",
+    "build": "npm run build:umd && npm run build:aot",
+    "build:umd": "webpack --config config/webpack.config.js",
+    "build:aot": "npm run build:js",
+    "build:js": "ngc -p src/tsconfig.json"
+  },
+  "devDependencies": {
+    "@angular/common": "^4.0.1",
+    "@angular/compiler": "^4.0.1",
+    "@angular/compiler-cli": "^4.0.1",
+    "@angular/core": "^4.0.1",
+    "@types/node": "^7.0.12",
+    "awesome-typescript-loader": "^3.1.2",
+    "rxjs": "^5.3.0",
+    "string-replace-loader": "^1.2.0",
+    "strip-sourcemap-loader": "0.0.1",
+    "typescript": "^2.2.2",
+    "webpack": "^2.3.3",
+    "zone.js": "^0.8.5"
+  }
+}
