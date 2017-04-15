@@ -6,8 +6,8 @@ const MathTAU = (Math.PI * 2);
 
 @Component({
     selector: 'hold-animation',
-    template: require('./hold-animation.view.html'),
-    styles: [require('./hold-animation.style.css').toString()]
+    templateUrl: './hold-animation.view.html',
+    styles: ['./hold-animation.style.css']
 })
 
 export class HoldAnimationComponent implements OnInit, OnDestroy {
