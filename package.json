@@ -1,6 +1,6 @@
 {
   "name": "ngx-canvas-hold-animation",
-  "version": "1.20170415.4",
+  "version": "1.20170415.5",
   "description": "Hold Animation for point or touch devices",
   "main": "bundles/ngx-canvas-hold-animation.umd.js",
   "module": "./dist/index.js",
