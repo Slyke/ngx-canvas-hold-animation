@@ -30,14 +30,9 @@ var config = {
       {
         test: /\.ts$/,
         loaders: [
-          'string-replace-loader?search=component\.css&replace=component\.scss',
           'awesome-typescript-loader?configFileName=src/tsconfig.json&declaration=false',
           'angular2-template-loader'
         ]
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['raw-loader', 'sass-loader']
       },
       {
         test: /\.(html|css)$/,

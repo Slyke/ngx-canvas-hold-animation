@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnDestroy, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnDestroy } from "@angular/core";
 
 import { JSUIEngine } from "js-ui-engine-ngx-wrapper";
 
@@ -7,8 +7,7 @@ const MathTAU = (Math.PI * 2);
 @Component({
     selector: 'hold-animation',
     template: require('./hold-animation.view.html'),
-    styleUrls: ['./hold-animation.style.css'],
-    encapsulation: ViewEncapsulation.None
+    styles: [require('./hold-animation.style.css').toString()]
 })
 
 export class HoldAnimationComponent implements OnInit, OnDestroy {
@@ -51,8 +50,9 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
     private screenObjects: any = {};
 
     public finishedFilled = false;
+    public stopAnimationRunning: boolean = true;
+
     public firstTimeLoaded = true;
-    public stopAnimationRunning: boolean = false;
 
     private canvasSize: Array<number> = [-1, -1];
 
@@ -66,23 +66,9 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
     }
 
     animateCommand(direction: string) {
-        this.firstTimeLoaded = false;
         this.lastAnimationTime = new Date().getTime();
-        
-        if (!this.showAnimation()) {
-            let smallestDimension = Math.min(this.animationContainer.nativeElement.clientHeight, this.animationContainer.nativeElement.clientWidth);
-            this.holdAnimationCanvas.nativeElement.width = smallestDimension;
-            this.holdAnimationCanvas.nativeElement.height = smallestDimension;
 
-            this.canvasSize = [this.holdAnimationCanvas.nativeElement.width, this.holdAnimationCanvas.nativeElement.height];
-
-            if (this.ctx) {
-                let minSize = (this.canvasSize[0] < this.canvasSize[1] ? 0 : 1);
-                this.ctx.font = (this.relToAbs(this.fontSize, minSize) * this.drawScale) + 'px ' + this.fontStyle;
-                this.setupObjects();
-                this.createObjects();
-            }
-        }
+        this.detectCanvasSize();
 
         if (direction === 'forward') {
             this.fillProgress();
@@ -107,15 +93,37 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
         this.canvasSize = [this.holdAnimationCanvas.nativeElement.width, this.holdAnimationCanvas.nativeElement.height];
         this.setupObjects();
         this.createObjects();
+        
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
         this.ctx = this.jsuiEngine.setupCanvas(this.holdAnimationCanvas.nativeElement); //Setup the canvas for drawing.
         
         let minSize = (this.canvasSize[0] < this.canvasSize[1] ? 0 : 1);
         this.ctx.font = (this.relToAbs(this.fontSize, minSize) * this.drawScale) + 'px ' + this.fontStyle;
         this.jsuiEngine.refreshScreen();
         this.lastAnimationTime = new Date().getTime();
+
+        setTimeout(() => { // Give all the things a little time to load.
+            this.firstTimeLoaded = false;
+        }, 20);
+
+    }
+
+    private detectCanvasSize() {
+        let smallestDimension = Math.min(this.animationContainer.nativeElement.clientHeight, this.animationContainer.nativeElement.clientWidth);
+        this.holdAnimationCanvas.nativeElement.width = smallestDimension;
+        this.holdAnimationCanvas.nativeElement.height = smallestDimension;
+
+        this.canvasSize = [this.holdAnimationCanvas.nativeElement.width, this.holdAnimationCanvas.nativeElement.height];
+
+        if (this.ctx) {
+            let minSize = (this.canvasSize[0] < this.canvasSize[1] ? 0 : 1);
+            this.ctx.font = (this.relToAbs(this.fontSize, minSize) * this.drawScale) + 'px ' + this.fontStyle;
+            this.setupObjects();
+            this.createObjects();
+        }
+    
     }
 
     resetState() {
@@ -289,9 +297,6 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
     };
 
     showAnimation(): boolean {
-        if (this.firstTimeLoaded) {
-            return false;
-        }
         if (this.stopAnimationRunning) {
             if (this.showAfterFinish && this.finishedFilled) {
                 return true;
