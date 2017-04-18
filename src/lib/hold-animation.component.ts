@@ -17,6 +17,7 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
     @Input() circleY: number = 0.50; // Position Y of the middle of the circles
 
     @Input() innerRadiusProgress: number = 0.40; // Radius of progress circles
+    @Input() innerRadiusProgressColor: string = ""; // Color of progress bar
     @Input() progressBarWidth: number = 0.08; // Line width of progress bar.
     @Input() arcAngleOffset: number = 0.75; // By default, the arc drawing starts at 90 degrees clockwise from the top.
 
@@ -168,22 +169,30 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
             'f': (this.arcAngleOffset * MathTAU),
             'shape': 'arc', // This lets the click and mouse move handler know what type of object it is.
             'render': (self) => {
-                // Dynamic progress bar color
-                let barColorRed: number = 255; // FF
-                let barColorGreen: number = 18; // 12
-                let barColorBlue: number = 14; // 0D
+
                 let barColorEnd = "#FFFFFF"; // Default, is ignored anyway.
 
-                // Color manipulation logic
-                barColorRed = (255 - (barColorRed * this.currentProgress));
-                barColorGreen = (255 * this.currentProgress);
+                if (this.innerRadiusProgressColor.length > 3) {
+                    // Dynamic progress bar color
+                    let barColorRed: number = 255; // FF
+                    let barColorGreen: number = 18; // 12
+                    let barColorBlue: number = 14; // 0D
+                    
 
-                // Ensure sanity
-                barColorRed = Math.min(Math.max(barColorRed, 0), 255);
-                barColorGreen = Math.min(Math.max(barColorGreen, 0), 255);
-                barColorBlue = Math.min(Math.max(barColorBlue, 0), 255);
+                    // Color manipulation logic
+                    barColorRed = (255 - (barColorRed * this.currentProgress));
+                    barColorGreen = (255 * this.currentProgress);
 
-                barColorEnd = "#" + this.toHex(Math.round(barColorRed)) + this.toHex(Math.round(barColorGreen)) + this.toHex(Math.round(barColorBlue));
+                    // Ensure sanity
+                    barColorRed = Math.min(Math.max(barColorRed, 0), 255);
+                    barColorGreen = Math.min(Math.max(barColorGreen, 0), 255);
+                    barColorBlue = Math.min(Math.max(barColorBlue, 0), 255);
+
+                    barColorEnd = "#" + this.toHex(Math.round(barColorRed)) + this.toHex(Math.round(barColorGreen)) + this.toHex(Math.round(barColorBlue));
+
+                } else {
+                    barColorEnd = this.innerRadiusProgressColor;
+                }
 
                 this.jsuiEngine.drawArc(self.x, self.y, self.r, self.s, self.f, null, this.jsuiEngine.canvasContext, {'strokeStyle': barColorEnd, 'lineWidth': this.relToAbs(this.progressBarWidth, 0) * this.drawScale});
             },
