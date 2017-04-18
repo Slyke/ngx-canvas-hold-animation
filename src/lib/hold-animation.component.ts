@@ -172,7 +172,7 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
 
                 let barColorEnd = "#FFFFFF"; // Default, is ignored anyway.
 
-                if (this.innerRadiusProgressColor.length > 3) {
+                if (this.innerRadiusProgressColor.length < 3) {
                     // Dynamic progress bar color
                     let barColorRed: number = 255; // FF
                     let barColorGreen: number = 18; // 12
@@ -192,6 +192,7 @@ export class HoldAnimationComponent implements OnInit, OnDestroy {
 
                 } else {
                     barColorEnd = this.innerRadiusProgressColor;
+                    
                 }
 
                 this.jsuiEngine.drawArc(self.x, self.y, self.r, self.s, self.f, null, this.jsuiEngine.canvasContext, {'strokeStyle': barColorEnd, 'lineWidth': this.relToAbs(this.progressBarWidth, 0) * this.drawScale});
